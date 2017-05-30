@@ -13,12 +13,30 @@
  */
 package rx.android.testutil;
 
+import android.os.Looper;
+
+import org.junit.Assert;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import rx.functions.Action0;
 
 public final class CountingAction extends AtomicInteger implements Action0 {
+    final boolean uiThread;
+
+    public CountingAction()
+    {
+        this(true);
+    }
+
+    public CountingAction(boolean uiThread)
+    {
+        this.uiThread = uiThread;
+    }
+
     @Override
     public void call() {
+        boolean mainLooper = Looper.myLooper() == Looper.getMainLooper();
+        if(mainLooper != uiThread) Assert.fail("Wrong thread. uiThread expected: "+ uiThread);
         getAndIncrement();
     }
 }

@@ -15,10 +15,14 @@ package rx.android.plugins;
 
 import org.junit.Test;
 
+import co.touchlab.doppl.testing.DopplTest;
+
+
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+@DopplTest
 public final class RxAndroidPluginsTest {
     @Test
     public void registeredSchedulersHookIsUsed() {

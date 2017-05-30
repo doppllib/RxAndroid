@@ -13,14 +13,17 @@
  */
 package rx.android;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowLooper;
+
+import co.touchlab.doppl.testing.DopplRobolectricTestRunner;
+
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
@@ -28,12 +31,18 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-@RunWith(RobolectricTestRunner.class)
-@Config(manifest=Config.NONE)
+@RunWith(DopplRobolectricTestRunner.class)
+//@Config(manifest=Config.NONE)
 public final class MainThreadSubscriptionTest {
   @Test public void verifyDoesNotThrowOnMainThread() throws InterruptedException {
-    MainThreadSubscription.verifyMainThread();
-    // Robolectric tests run on its main thread.
+    new Handler(Looper.getMainLooper()).post(new Runnable()
+    {
+      @Override
+      public void run()
+      {
+        MainThreadSubscription.verifyMainThread();
+      }
+    });
   }
 
   @Test public void verifyThrowsOffMainThread() throws InterruptedException {
@@ -54,15 +63,18 @@ public final class MainThreadSubscriptionTest {
   }
 
   @Test public void onUnsubscribeRunsSyncOnMainThread() {
-    ShadowLooper.pauseMainLooper();
+//    ShadowLooper.pauseMainLooper();
 
     final AtomicBoolean called = new AtomicBoolean();
     new MainThreadSubscription() {
       @Override protected void onUnsubscribe() {
+        if(Looper.myLooper() != Looper.getMainLooper())
+          throw new IllegalStateException("Wrong thread");
         called.set(true);
       }
     }.unsubscribe();
 
+    shortSleep();
     assertTrue(called.get());
   }
 
@@ -71,6 +83,8 @@ public final class MainThreadSubscriptionTest {
 
     MainThreadSubscription subscription = new MainThreadSubscription() {
       @Override protected void onUnsubscribe() {
+        if(Looper.myLooper() != Looper.getMainLooper())
+          throw new IllegalStateException("Wrong thread");
         called.incrementAndGet();
       }
     };
@@ -79,11 +93,24 @@ public final class MainThreadSubscriptionTest {
     subscription.unsubscribe();
     subscription.unsubscribe();
 
+    shortSleep();
     assertEquals(1, called.get());
   }
 
+  private void shortSleep()
+  {
+    try
+    {
+      Thread.sleep(500);
+    }
+    catch(InterruptedException e)
+    {
+      //
+    }
+  }
+
   @Test public void onUnsubscribePostsOffMainThread() throws InterruptedException {
-    ShadowLooper.pauseMainLooper();
+//    ShadowLooper.pauseMainLooper();
 
     final CountDownLatch latch = new CountDownLatch(1);
     final AtomicBoolean called = new AtomicBoolean();
@@ -91,6 +118,11 @@ public final class MainThreadSubscriptionTest {
       @Override public void run() {
         new MainThreadSubscription() {
           @Override protected void onUnsubscribe() {
+
+            shortSleep();
+
+            if(Looper.myLooper() != Looper.getMainLooper())
+              throw new IllegalStateException("Wrong thread");
             called.set(true);
           }
         }.unsubscribe();
@@ -101,7 +133,11 @@ public final class MainThreadSubscriptionTest {
     assertTrue(latch.await(1, SECONDS));
     assertFalse(called.get()); // Callback has not yet run.
 
-    ShadowLooper.runMainLooperOneTask();
+//    ShadowLooper.runMainLooperOneTask();
+
+    shortSleep();
+    shortSleep();
+
     assertTrue(called.get());
   }
 }

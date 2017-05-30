@@ -15,9 +15,13 @@ package rx.android.schedulers;
 
 import org.junit.Test;
 
+import co.touchlab.doppl.testing.DopplTest;
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+@DopplTest
 @SuppressWarnings("deprecation")
 public class HandlerSchedulerTest {
     @Test

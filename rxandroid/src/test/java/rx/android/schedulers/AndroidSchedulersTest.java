@@ -16,6 +16,8 @@ package rx.android.schedulers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import co.touchlab.doppl.testing.DopplTest;
 import rx.Scheduler;
 import rx.android.plugins.RxAndroidPlugins;
 import rx.android.plugins.RxAndroidSchedulersHook;
@@ -23,6 +25,7 @@ import rx.android.testutil.EmptyScheduler;
 
 import static org.junit.Assert.assertSame;
 
+@DopplTest
 public class AndroidSchedulersTest {
 
     @Before @After
