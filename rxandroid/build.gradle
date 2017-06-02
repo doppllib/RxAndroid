@@ -6,8 +6,8 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def dopplCoreVersion = '0.7.1-SNAPSHOT'
-def dopplRxJavaVersion = '1.2.1.5'
+def dopplCoreVersion = '0.7.1'
+def dopplRxJavaVersion = '1.2.1.1'
 
 dependencies {
     compile 'junit:junit:4.11'
@@ -40,6 +40,9 @@ publishing {
                     asNode().dependencies.dependency.find {
                         it.artifactId.text() == "rxjava"
                     }.version[0].value = dopplRxJavaVersion
+                    asNode().dependencies.dependency.find {
+                        it.artifactId.text() == "rxjava"
+                    }.groupId[0].value = "co.doppl.io.reactivex"
                 }
             }
         }
