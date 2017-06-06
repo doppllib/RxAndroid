@@ -8,7 +8,7 @@ targetCompatibility = 1.7
 
 def javaCoreVersion = '0.7.4'
 def dopplCoreVersion = '0.7.4.0'
-def dopplRxJavaVersion = '1.2.1.2'
+def dopplRxJavaVersion = '1.2.1.3-SNAPSHOT'
 
 dependencies {
     compile 'junit:junit:4.11'
