@@ -12,7 +12,7 @@ iOS development with J2objc using the [Doppl build framework](http://doppl.co/).
 ```groovy
 dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
-    doppl 'co.doppl.io.reactivex:rxandroid:1.2.1.3'
+    doppl '{{GROUP}}:rxandroid:{{VERSION}}'
 }
 ```
 
