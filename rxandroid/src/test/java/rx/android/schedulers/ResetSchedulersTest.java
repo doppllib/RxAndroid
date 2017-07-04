@@ -16,7 +16,7 @@ package rx.android.schedulers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.touchlab.doppl.testing.DopplRobolectricTestRunner;
+import co.touchlab.doppl.testing.DopplContextDelegateTestRunner;
 import rx.Scheduler;
 import rx.android.plugins.RxAndroidPlugins;
 import rx.android.plugins.RxAndroidSchedulersHook;
@@ -25,7 +25,7 @@ import rx.schedulers.TestScheduler;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(DopplRobolectricTestRunner.class)
+@RunWith(DopplContextDelegateTestRunner.class)
 //@Config(manifest = Config.NONE)
 public final class ResetSchedulersTest {
 

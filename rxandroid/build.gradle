@@ -6,9 +6,9 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def javaCoreVersion = '0.7.5'
-def dopplCoreVersion = '0.7.5.0'
-def dopplRxJavaVersion = '1.2.1.3'
+def javaCoreVersion = '0.8.0'
+def dopplCoreVersion = '0.8.0.0'
+def dopplRxJavaVersion = '1.2.1.4'
 
 dependencies {
     testCompile 'junit:junit:4.11'

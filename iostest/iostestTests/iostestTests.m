@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-//#import "AllTests.h"
 
 @interface iostestTests : XCTestCase
 
@@ -16,7 +15,7 @@
 @implementation iostestTests
 
 - (void)testExample {
-//    [AllTests runAllTests];
+    
 }
 
 

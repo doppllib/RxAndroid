@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.touchlab.doppl.testing.DopplRobolectricTestRunner;
+import co.touchlab.doppl.testing.DopplContextDelegateTestRunner;
 
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-@RunWith(DopplRobolectricTestRunner.class)
+@RunWith(DopplContextDelegateTestRunner.class)
 //@Config(manifest=Config.NONE)
 public final class MainThreadSubscriptionTest {
   @Test public void verifyDoesNotThrowOnMainThread() throws InterruptedException {

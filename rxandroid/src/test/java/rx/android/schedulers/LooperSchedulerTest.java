@@ -21,7 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.touchlab.doppl.testing.DopplRobolectricTestRunner;
+import co.touchlab.doppl.testing.DopplContextDelegateTestRunner;
 import rx.Scheduler;
 import rx.Scheduler.Worker;
 import rx.Subscription;
@@ -39,7 +39,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-@RunWith(DopplRobolectricTestRunner.class)
+@RunWith(DopplContextDelegateTestRunner.class)
 //@Config(manifest=Config.NONE)
 public class LooperSchedulerTest {
 

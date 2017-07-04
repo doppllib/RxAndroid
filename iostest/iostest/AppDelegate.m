@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "AndroidOsLooper.h"
+#import "DopplRuntime.h"
+#import "BackgroundTests.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +18,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [AndroidOsLooper prepareMainLooper];
+    [DopplRuntime start];
+    [BackgroundTests runAllTestsBackground];
     return YES;
 }
 
