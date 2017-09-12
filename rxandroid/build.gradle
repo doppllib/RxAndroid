@@ -6,9 +6,9 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def javaCoreVersion = '0.8.0'
-def dopplCoreVersion = '0.8.0.0'
-def dopplRxJavaVersion = '1.2.1.4'
+def javaCoreVersion = '0.8.3'
+def dopplCoreVersion = '0.8.3.0'
+def dopplRxJavaVersion = '1.2.10.1'
 
 dependencies {
     testCompile 'junit:junit:4.11'
@@ -19,7 +19,7 @@ dependencies {
     testCompile "co.doppl.lib:androidbasetest:$javaCoreVersion"
     testDoppl "co.doppl.lib:androidbasetest:$dopplCoreVersion"
 
-    compile "io.reactivex:rxjava:1.2.1"
+    compile "io.reactivex:rxjava:1.2.10"
     doppl "co.doppl.io.reactivex:rxjava:$dopplRxJavaVersion"
 
     testApt "co.doppl.lib:testapt:$javaCoreVersion"
