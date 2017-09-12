@@ -3,6 +3,7 @@ subprojects {
         repositories {
             mavenCentral()
             jcenter()
+            maven { url dopplMavenDeploy }
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:2.1.0'
@@ -11,6 +12,8 @@ subprojects {
 
     repositories {
         mavenCentral()
+        jcenter()
+        maven { url dopplMavenDeploy }
     }
 }
 
