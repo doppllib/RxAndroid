@@ -1,6 +1,7 @@
 buildscript {
+    def doppl_gradle_version = doppl_gradle
     dependencies {
-        classpath 'co.doppl:gradle:0.8.8'
+        classpath "co.doppl:gradle:${doppl_gradle_version}"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
@@ -9,17 +10,15 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'co.doppl.gradle'
 
-group = 'co.doppl.io.reactivex.rxjava2'
-version = '2.0.1.4'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def javaCoreVersion = '0.8.5'
-def dopplCoreVersion = '0.8.5.0'
+def javaCoreVersion = doppl_core_java
+def dopplCoreVersion = doppl_core_doppl
 
 dependencies {
-    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
-    doppl "co.doppl.io.reactivex.rxjava2:rxjava:2.1.5.0"
+    compile "io.reactivex.rxjava2:rxjava:$doppl_rxjava2_java"
+    doppl "co.doppl.io.reactivex.rxjava2:rxjava:$doppl_rxjava2_doppl"
 
     compileOnly "co.doppl.lib:androidbase:$javaCoreVersion"
     testCompile "co.doppl.lib:androidbasetest:$javaCoreVersion"
@@ -27,12 +26,15 @@ dependencies {
     doppl "co.doppl.lib:androidbase:$dopplCoreVersion"
     testDoppl "co.doppl.lib:androidbasetest:$dopplCoreVersion"
 
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:$doppl_junit_java"
+    testDoppl "co.doppl.junit:junit:$doppl_junit_doppl"
     testCompile 'org.robolectric:robolectric:3.1.2'
 }
 
 ext.bintrayGitUrl = 'https://github.com/doppllib/RxAndroid.git'
-ext.javaVersion = '2.0.1'
+group = 'co.doppl.io.reactivex.rxjava2'
+version = doppl_rxandroid_doppl
+
 apply from: "$dopplSharedScriptHome/doppllibpublish.gradle"
 apply from: "$dopplSharedScriptHome/bintray.gradle"
 
@@ -41,7 +43,5 @@ test{
 }
 
 dopplConfig {
-    copyMainOutput "iostest/rxjavaframework/main"
-    copyTestOutput "iostest/rxjavaframework/test"
-    copyDependencies true
+    skipTests = true
 }
